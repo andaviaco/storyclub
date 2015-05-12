@@ -6,7 +6,7 @@
     "Andrés Ávila <andpy.me@gmail.com>"
   ],
   "license": "MIT",
-  "homepage": "templates/index.html",
+  "homepage": "club/templates/index.html",
   "private": true,
   "ignore": [
     "**/.*",
