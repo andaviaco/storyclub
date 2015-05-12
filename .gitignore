@@ -8,3 +8,10 @@ local_settings.py
 
 ### Python ###
 .venv
+
+### Bower ###
+bower_components
+lib
+.bower-cache
+.bower-registry
+.bower-tmp
