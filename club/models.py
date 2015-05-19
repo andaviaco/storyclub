@@ -66,8 +66,8 @@ class User(AbstractBaseUser):
     def is_staff(self):
         if self.role == ADMIN_USER:
             return True
-
         return False
+
 
 class Story(models.Model):
     id_story = models.AutoField(primary_key=True)
@@ -76,6 +76,7 @@ class Story(models.Model):
     publish_date = models.DateTimeField(auto_now_add=True)
     closed = models.BooleanField(default=False, verbose_name='Is closed')
     public = models.BooleanField(default=True, verbose_name='Is public')
+    users = models.ManyToManyField(User, through='UsersRelStories', verbose_name='Related users')
 
     def __unicode__(self):
         return '{}'.format(self.title)
@@ -87,6 +88,7 @@ class Segment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     is_last = models.BooleanField(default=False)
     proposed_end = models.BooleanField(default=False)
+    users = models.ManyToManyField(User, through='UsersRelSegments', verbose_name='Related users')
     id_story = models.ForeignKey(Story, verbose_name='Story')
 
     def __unicode__(self):
@@ -104,3 +106,19 @@ class Comment(models.Model):
     def __unicode__(self):
         return '{}'.format(self.text[:50])
 
+
+class UsersRelStories(models.Model):
+    id_user = models.ForeignKey(User, verbose_name='User')
+    id_story = models.ForeignKey(Story, verbose_name='Story')
+    favorite = models.BooleanField(default=False)
+    following = models.BooleanField(default=False)
+    author = models.BooleanField(default=False)
+    contribution = models.BooleanField(default=False)
+    can_contribute = models.BooleanField(default=True)
+
+
+class UsersRelSegments(models.Model):
+    id_user = models.ForeignKey(User, verbose_name='User')
+    id_segment = models.ForeignKey(Segment, verbose_name='Segment')
+    author = models.BooleanField(default=True)
+    vote = models.NullBooleanField(default=False, blank=True)
