@@ -16,9 +16,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from club.views import IndexView
+from rest_framework import routers
+
+from club.views import IndexView, StoryViewSet
+
+
+router = routers.DefaultRouter()
+router.register(r'stories', StoryViewSet)
 
 urlpatterns = [
+    url(r'^api/', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url('^.*$', IndexView.as_view(), name='index'),
