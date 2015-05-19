@@ -74,8 +74,8 @@ class Story(models.Model):
     title = models.CharField(max_length=254)
     first_text = models.TextField(max_length=1024)
     publish_date = models.DateTimeField(auto_now_add=True)
-    closed = models.BooleanField(default=False)
-    public = models.BooleanField(default=True)
+    closed = models.BooleanField(default=False, verbose_name='Is closed')
+    public = models.BooleanField(default=True, verbose_name='Is public')
 
     def __unicode__(self):
         return '{}'.format(self.title)
@@ -87,7 +87,20 @@ class Segment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     is_last = models.BooleanField(default=False)
     proposed_end = models.BooleanField(default=False)
-    id_story = models.ForeignKey(Story)
+    id_story = models.ForeignKey(Story, verbose_name='Story')
 
     def __unicode__(self):
         return '{} <{}>'.format(self.text[:50], self.date)
+
+
+class Comment(models.Model):
+    id_comment = models.AutoField(primary_key=True)
+    text = models.TextField(max_length=200)
+    date = models.DateTimeField(auto_now_add=True)
+    id_user = models.ForeignKey(User, verbose_name='User')
+    id_segment = models.ForeignKey(Segment, verbose_name='Segment', null=True)
+    id_story = models.ForeignKey(Story, verbose_name='Story')
+
+    def __unicode__(self):
+        return '{}'.format(self.text[:50])
+
