@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import django.utils.timezone
 
 
 class Migration(migrations.Migration):
@@ -10,6 +11,23 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='User',
+            fields=[
+                ('password', models.CharField(max_length=128, verbose_name='password')),
+                ('last_login', models.DateTimeField(default=django.utils.timezone.now, verbose_name='last login')),
+                ('id_user', models.AutoField(serialize=False, primary_key=True)),
+                ('email', models.EmailField(unique=True, max_length=75)),
+                ('username', models.CharField(unique=True, max_length=40)),
+                ('role', models.CharField(default=b'D', max_length=1, verbose_name=b'User role', choices=[(b'A', b'Admin'), (b'M', b'Moderator'), (b'D', b'Default')])),
+                ('registered_date', models.DateTimeField(auto_now_add=True)),
+                ('updated_at', models.DateTimeField(auto_now=True)),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
+        ),
         migrations.CreateModel(
             name='Segment',
             fields=[

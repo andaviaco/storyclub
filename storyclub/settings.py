@@ -104,6 +104,7 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'club.User'
 
 # REST Config
 
