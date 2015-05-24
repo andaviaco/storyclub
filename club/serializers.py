@@ -11,6 +11,7 @@ class StorySerializer(serializers.ModelSerializer):
         fields = (
             'id_story',
             'title',
+            'image_url',
             'first_text',
             'publish_date',
             'closed',

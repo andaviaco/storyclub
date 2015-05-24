@@ -72,6 +72,7 @@ class User(AbstractBaseUser):
 class Story(models.Model):
     id_story = models.AutoField(primary_key=True)
     title = models.CharField(max_length=254)
+    image_url = models.CharField(max_length=255, blank=True)
     first_text = models.TextField(max_length=1024)
     publish_date = models.DateTimeField(auto_now_add=True)
     closed = models.BooleanField(default=False, verbose_name='Is closed')
