@@ -4,6 +4,7 @@
 *.pyc
 *.sqlite3
 __pycache__/
+migrations/
 local_settings.py
 
 ### Python ###
