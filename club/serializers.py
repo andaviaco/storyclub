@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 
-from club.models import Story, Segment, User
+from club.models import Story, Segment, User, Comment
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -26,8 +26,33 @@ class UserSerializer(serializers.ModelSerializer):
             return User.objects.create(**validated_data)
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    author = UserSerializer(read_only=True, required=False)
+
+    class Meta:
+        model = Comment
+        fields = (
+            'id_comment',
+            'text',
+            'date',
+            'author',
+            'segment',
+            'story',
+        )
+
+        read_only_fields = (
+            'date',
+        )
+
+    def get_validation_exclusions(self, *arg, **kwargs):
+        exclusions = super(CommentSerializer, self).get_validation_exclusions()
+
+        return exclusions + ['author']
+
+
 class SegmentSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True, required=False)
+    comments = CommentSerializer(many=True, required=False, read_only=True)
 
     class Meta:
         model = Segment
@@ -38,6 +63,7 @@ class SegmentSerializer(serializers.ModelSerializer):
             'is_last',
             'proposed_end',
             'author',
+            'comments',
             'users_votes',
             'id_story',
         )
@@ -47,6 +73,7 @@ class SegmentSerializer(serializers.ModelSerializer):
             'date',
             'is_last',
             'proposed_end',
+            'author',
             'users_votes',
         )
 

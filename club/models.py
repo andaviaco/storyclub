@@ -102,12 +102,12 @@ class Comment(models.Model):
     id_comment = models.AutoField(primary_key=True)
     text = models.TextField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
-    id_user = models.ForeignKey(User, verbose_name='User')
-    id_segment = models.ForeignKey(Segment, verbose_name='Segment', null=True)
-    id_story = models.ForeignKey(Story, verbose_name='Story')
+    author = models.ForeignKey(User)
+    segment = models.ForeignKey(Segment, null=True, related_name='comments')
+    story = models.ForeignKey(Story, verbose_name='Story')
 
     def __unicode__(self):
-        return '{}'.format(self.text[:50])
+        return '{} <Segment: {}> <Story: {}>'.format(self.id_comment, self.segment, self.story)
 
 
 class UsersRelStories(models.Model):
