@@ -5,10 +5,10 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 
-from club.models import Story, Segment
-from club.serializers import StorySerializer, SegmentSerializer
+from club.models import Story, Segment, Comment
+from club.serializers import StorySerializer, SegmentSerializer, CommentSerializer
 
 
 class IndexView(TemplateView):
@@ -20,7 +20,7 @@ class IndexView(TemplateView):
 
 
 class StoryViewSet(viewsets.ModelViewSet):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer_class = StorySerializer
     queryset = Story.objects.order_by('-publish_date')
 
@@ -41,6 +41,24 @@ class StoryViewSet(viewsets.ModelViewSet):
 
 
 class SegmentViewSet(viewsets.ModelViewSet):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer_class = SegmentSerializer
-    queryset = Segment.objects.order_by('-date')
+    queryset = Segment.objects.order_by('-id_story')
+
+    def perform_create(self, serializer):
+        print self.request
+        instance = serializer.save(author=self.request.user)
+
+        return super(SegmentViewSet, self).perform_create(serializer)
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.order_by('id_comment')
+
+    def perform_create(self, serializer):
+        print self.request
+        instance = serializer.save(author=self.request.user)
+
+        return super(CommentViewSet, self).perform_create(serializer)
