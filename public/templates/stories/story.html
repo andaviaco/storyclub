@@ -1,0 +1,108 @@
+<section id="main">
+    <section class="story">
+        <header>
+            <div class="meta">
+                <figure>
+                    <img ng-src="{{vm.story.image_url}}">
+                </figure>
+                <div class="backdrop"></div>
+                <div class="titel-container">
+                    <h1 class="title" ng-bind="vm.story.title"></h1>
+                    <span class="lead">
+                        <small>
+                            created by <a href="#" class="creator-name" ng-bind="vm.story.creator.username"></a>
+                        </small>
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <section class="content">
+            <article class="segment lead-segment">
+                <div class="meta">
+                    <p class="author "><a href="#" class="text-muted">andres</a></p>
+                    <spam class="date text-muted">{{vm.story.publish_date | date: 'mediumDate'}}</spam>
+                </div>
+                <div class="text">
+                    <p ng-bind="vm.story.first_text">
+                    </p>
+                </div>
+                <section class="notes">
+                    <span class="comments-btn">
+                        <i class="fa fa-comments fa-lg"></i>
+                    </span>
+                </section>
+            </article>
+
+            <article class="segment" ng-repeat="segment in vm.story.segments">
+                <div class="meta">
+                    <p class="author "><a href="#" class="text-muted" ng-bind="segment.author.username"></a></p>
+                    <spam class="date text-muted">{{segment.date | date: 'mediumDate'}}</spam>
+                </div>
+                <div class="text">
+                    <p ng-bind="segment.text">
+                    </p>
+                </div>
+                <section class="notes">
+                    <span class="comments-btn" ng-click="vm.toggleComments($index)">
+                        <i class="fa fa-comments fa-lg"></i>
+                    </span>
+                    <div ng-show="segment.show_comments">
+                        <article class="note" ng-repeat="comment in segment.comments">
+                            <blockquote class="content" ng-bind="comment.text">
+                            </blockquote>
+                            <span class="author"><a href="#" class="" ng-bind="comment.author.username"></a></span>
+                        </article>
+
+                        <form name="note_form">
+                            <fieldset class="note">
+                                <blockquote class="content">
+                                    <textarea name="" id="" rows="1" class="form-control"></textarea>
+                                </blockquote>
+                                <span class="author"><a href="#" class="">Andrés</a></span>
+                                <button type="submit" class="btn btn-link btn-sm pull-right">Save</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </section>
+            </article>
+
+            <article class="segment">
+                <form name="segment_form" ng-submit="addSegment(vm.new_segment)">
+                    <div class="meta">
+                        <legend>
+                            <label class="main-label" for="new_segment_content">Contribute!</label>
+                        </legend>
+                        <p class="author">andres</p>
+                        <spam class="date text-muted">{{vm.today | date: 'mediumDate'}}</spam>
+                    </div>
+
+                    <div class="text">
+                        <fieldset>
+                            <textarea id="new_segment_content" name="text" rows="5" class="form-control" ng-model="vm.new_segment.text"></textarea>
+                            <span class="char-counter">{{700 - vm.new_segment.text.length}}</span>
+
+                            <button type="submit" class="btn btn-link pull-right">Submit</button>
+                        </fieldset>
+                    </div>
+                </form>
+            </article>
+
+        </section>
+
+    </section>
+
+</section>
+
+<footer class="footerbar">
+    <div class="pull-right">
+        <button type="button" class="btn btn-link favorite"><i class="fa fa-star-o fa-lg"></i></button>
+        <button type="butt  on" class="btn btn-default btn-sm">Follow</button>
+
+        <div class="social-share">
+            <span class="social-btn"><i class="fa fa-facebook"></i></span>
+            <span class="social-btn"><i class="fa fa-twitter"></i></span>
+            <span class="social-btn"><i class="fa fa-share-alt"></i></span>
+        </div>
+    </div>
+</footer>

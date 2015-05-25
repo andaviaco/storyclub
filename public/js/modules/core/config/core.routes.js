@@ -10,6 +10,9 @@ function routes($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('app', {
             url: '/',
-            templateUrl: 'public/templates/core/index.html'
-        })
+            templateUrl: 'public/templates/core/main.html'
+        });
+
+
+
 }

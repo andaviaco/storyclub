@@ -1,0 +1,255 @@
+
+body {
+    text-rendering: optimizelegibility;
+}
+
+body::selection {
+    color: #FFF;
+    background: #4582EC; /* WebKit/Blink Browsers */
+}
+
+body::-moz-selection {
+    color: #FFF;
+    background: #4582EC; /* Gecko Browsers */
+}
+
+#main {
+    width: 900px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.backdrop {
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    background-color: rgba(0,0,0, 0.3);
+}
+
+.footerbar {
+    display: block;
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    z-index: 500;
+    width: 100%;
+    padding: 0 3em;
+}
+
+.footerbar .favorite {
+    marg
+}
+
+.footerbar .social-share {
+    display: inline-block;
+    border-left: 1px solid #ccc;
+    padding-left: 1em;
+    margin-left: 1em;
+}
+
+.social-share .social-btn:not(:last-child) {
+    margin-right: 1em;
+}
+
+.social-share .social-btn:hover {
+    cursor: pointer;
+}
+
+.story {
+    width: 700px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.story header {
+    position: relative;
+    margin-bottom: 3em;
+}
+
+.story header .title {
+    margin-bottom: 0;
+}
+
+.story header img {
+    width: 100%;
+    /*opacity: 0.4;*/
+}
+
+.story header .creator-name {
+    color: #5bc0de;
+}
+
+.story header .titel-container {
+    color: #FFF;
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+}
+
+.segment {
+    position: relative;
+    margin-bottom:  2em;
+}
+
+.segment form legend {
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+.segment form .main-label {
+    font-weight: normal;
+}
+
+.segment form textarea {
+    resize: vertical;
+}
+
+.segment form .char-counter {
+    color: #737373;
+    font-size: 0.8em;
+}
+
+.segment .meta {
+    position: absolute;
+    left: -116px;
+    width: 100px;
+    text-align: right;
+}
+
+.segment .meta .author {
+    color: #B3B3B3;
+    margin-bottom: 0.3em;
+}
+
+.segment .text {
+    font-size: 1.3em;
+    word-wrap: break-word;
+}
+
+
+.segment .notes {
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: -266px;
+    width: 250px;
+}
+
+.notes .comments-btn {
+    color: #B3B3B3;
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+.notes .comments-btn:hover {
+    cursor: pointer;
+}
+
+.notes form textarea {
+    resize: vertical;
+}
+
+.note {
+    margin-bottom: 1em;
+}
+
+.note .content {
+    font-size: 14px;
+    padding: 5px 10px;
+    margin: 0;
+}
+
+
+.note .author {
+    display: inline-block;
+    padding-left: 1em;
+}
+
+.note .author a {
+    color: #B3B3B3;
+}
+
+.notes form button[type="submit"] {
+    padding: 0 10px;
+}
+
+
+/* Index */
+
+.welcome {
+    margin: 5em 0;
+}
+
+.story-card {
+    position: relative;
+    margin-bottom: 3em;
+}
+
+.story-card .title {
+    margin-bottom: 0;
+}
+
+.story-card img {
+    width: 100%;
+    /*opacity: 0.4;*/
+}
+
+.story-card .creator-name {
+    color: #5bc0de;
+}
+.story-card .backdrop {
+    background-color: rgba(0,0,0, 0.5);
+}
+
+.story-card .featured-badge {
+    text-align: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 1em;
+    padding-right: 1em;
+}
+
+.featured-badge .feactured-text {
+    color: #5bc0de;
+    font-size: 1.4em;
+    margin: 0;
+    font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.story-card .snapshot-container {
+    color: #FFF;
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+}
+
+.story-card .snapshot-text {
+    font-size: 1.2em;
+}
+
+.story-card .continue-link {
+    color: #5bc0de;
+}
+
+.story-card .item-link {
+    color: inherit;
+    display:inherit;
+    text-decoration:none;
+}
+
+.story-list .story-card:hover {
+    opacity: 0.8;
+}
+
+.section-title {
+}
+
+.rate-star {
+    color: #F0AD4E;
+    display: block;
+}
