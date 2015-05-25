@@ -18,11 +18,12 @@ from django.contrib import admin
 
 from rest_framework import routers
 
-from club.views import IndexView, StoryViewSet
+from club.views import IndexView, StoryViewSet, SegmentViewSet
 
 
 router = routers.DefaultRouter()
 router.register(r'stories', StoryViewSet)
+router.register(r'segments', SegmentViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
