@@ -47,17 +47,17 @@
                     <span class="comments-btn" ng-click="vm.toggleComments($index)">
                         <i class="fa fa-comments fa-lg"></i>
                     </span>
-                    <div ng-show="segment.show_comments">
+                    <div class="comments" ng-show="segment.show_comments">
                         <article class="note" ng-repeat="comment in segment.comments">
                             <blockquote class="content" ng-bind="comment.text">
                             </blockquote>
                             <span class="author"><a href="#" class="" ng-bind="comment.author.username"></a></span>
                         </article>
 
-                        <form name="note_form">
+                        <form name="comment_form" ng-submit="vm.addComment(vm.new_comment, segment)">
                             <fieldset class="note">
                                 <blockquote class="content">
-                                    <textarea name="" id="" rows="1" class="form-control"></textarea>
+                                    <textarea name="text" id="" rows="1" class="form-control" ng-model="vm.new_comment.text"></textarea>
                                 </blockquote>
                                 <span class="author"><a href="#" class="">Andrés</a></span>
                                 <button type="submit" class="btn btn-link btn-sm pull-right">Save</button>
@@ -68,7 +68,7 @@
             </article>
 
             <article class="segment">
-                <form name="segment_form" ng-submit="addSegment(vm.new_segment)">
+                <form name="segment_form" ng-submit="vm.addSegment(vm.new_segment)">
                     <div class="meta">
                         <legend>
                             <label class="main-label" for="new_segment_content">Contribute!</label>
@@ -79,7 +79,7 @@
 
                     <div class="text">
                         <fieldset>
-                            <textarea id="new_segment_content" name="text" rows="5" class="form-control" ng-model="vm.new_segment.text"></textarea>
+                            <textarea id="new_segment_content" name="text" rows="5" class="form-control" ng-model="vm.new_segment.text" required></textarea>
                             <span class="char-counter">{{700 - vm.new_segment.text.length}}</span>
 
                             <button type="submit" class="btn btn-link pull-right">Submit</button>

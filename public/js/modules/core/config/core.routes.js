@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('club').config(routes);
+angular.module('core').config(routes);
 
 routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 

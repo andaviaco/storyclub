@@ -133,8 +133,13 @@ body::-moz-selection {
     font-size: 14px;
     position: absolute;
     top: 0;
-    right: -266px;
-    width: 250px;
+    right: -286px;
+    width: 270px;
+}
+
+.segment .notes .comments{
+    margin-left: 3em;
+    margin-top: -2em;
 }
 
 .notes .comments-btn {
