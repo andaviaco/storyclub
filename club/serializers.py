@@ -36,8 +36,8 @@ class CommentSerializer(serializers.ModelSerializer):
             'text',
             'date',
             'author',
-            'segment',
-            'story',
+            'id_segment',
+            'id_story',
         )
 
         read_only_fields = (

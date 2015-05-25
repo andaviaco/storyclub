@@ -103,8 +103,8 @@ class Comment(models.Model):
     text = models.TextField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User)
-    segment = models.ForeignKey(Segment, null=True, related_name='comments')
-    story = models.ForeignKey(Story, verbose_name='Story')
+    id_segment = models.ForeignKey(Segment, null=True, verbose_name='Segment', related_name='comments')
+    id_story = models.ForeignKey(Story, verbose_name='Story')
 
     def __unicode__(self):
         return '{} <Segment: {}> <Story: {}>'.format(self.id_comment, self.segment, self.story)
