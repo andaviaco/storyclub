@@ -75,6 +75,7 @@ class Story(models.Model):
     image_url = models.CharField(max_length=255, blank=True)
     first_text = models.TextField(max_length=1024)
     publish_date = models.DateTimeField(auto_now_add=True)
+    creator = models.ForeignKey(User, related_name="stories")
     closed = models.BooleanField(default=False, verbose_name='Is closed')
     public = models.BooleanField(default=True, verbose_name='Is public')
     users = models.ManyToManyField(User, through='UsersRelStories', verbose_name='Related users')
@@ -89,8 +90,9 @@ class Segment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     is_last = models.BooleanField(default=False)
     proposed_end = models.BooleanField(default=False)
-    users = models.ManyToManyField(User, through='UsersRelSegments', verbose_name='Related users')
-    id_story = models.ForeignKey(Story, verbose_name='Story')
+    author = models.ForeignKey(User,  related_name="author")
+    users_votes = models.ManyToManyField(User, through='Votes')
+    id_story = models.ForeignKey(Story, verbose_name='Story', related_name='segments')
 
     def __unicode__(self):
         return '{} <{}>'.format(self.text[:50], self.date)
@@ -113,13 +115,11 @@ class UsersRelStories(models.Model):
     id_story = models.ForeignKey(Story, verbose_name='Story')
     favorite = models.BooleanField(default=False)
     following = models.BooleanField(default=False)
-    author = models.BooleanField(default=False)
     contribution = models.BooleanField(default=False)
     can_contribute = models.BooleanField(default=True)
 
 
-class UsersRelSegments(models.Model):
+class Votes(models.Model):
     id_user = models.ForeignKey(User, verbose_name='User')
     id_segment = models.ForeignKey(Segment, verbose_name='Segment')
-    author = models.BooleanField(default=True)
     vote = models.NullBooleanField(default=False, blank=True)
