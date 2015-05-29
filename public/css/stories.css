@@ -190,6 +190,8 @@ body::-moz-selection {
 .story-card {
     position: relative;
     margin-bottom: 3em;
+    min-height: 300px;
+    min-width: 900px;
 }
 
 .story-card .title {
@@ -226,6 +228,11 @@ body::-moz-selection {
     line-height: 1.1;
 }
 
+.story-card .feat-ico:before {
+    content: ' FEATURE ';
+    font-style: normal;
+}
+
 .story-card .snapshot-container {
     color: #FFF;
     position: absolute;
@@ -257,4 +264,12 @@ body::-moz-selection {
 .rate-star {
     color: #F0AD4E;
     display: block;
+}
+
+.title a {
+    color: inherit;
+}
+
+.title a:hover {
+    text-decoration: none;
 }

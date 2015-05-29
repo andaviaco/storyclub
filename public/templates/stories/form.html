@@ -1,66 +1,88 @@
 <div class="container">
-    <h1>Submit new story</h1>
-    <hr>
-    <form role="form" class="form-horizontal">
-        <div class="form-group">
-            <div class="col-md-12 field">
-                <label class="control-label" for="titleInput">Title:</label>
-            </div>
-            <div class="col-md-3">
-                <input type="text" class="form-control" id="titleInput" placeholder="Enter story title">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                <label class="control-label">Share</label>
-            </div>
-            <div class="col-md-3">
-                <label class="radio-inline">
-                    <input type="radio" name="share" value="shareAll" checked>Share with all
-                </label>
-            </div>
-            <label class="radio-inline">
-                <input type="radio" name="share" value="shareSome">Share with some
-            </label>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12 field">
-                <label class="control-label" for="categorySelect">Category</label>
-            </div>
-            <div class="col-md-3">
-                <select class="form-control" id="categorySelect">
-                    <option>General</option>
-                    <option>Science Fiction</option>
-                    <option>Narration</option>
-                    <option>Horror</option>
-                    <option>Drama</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12 field">
-                <label class="control-label">Image</label>
-            </div>
-            <div class="col-md-3">
-                <input type="file">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12 field">
-                <label class="control-label" for="initText">Initial text:</label>
-            </div>
-            <div class="col-md-6">
-                <div class="text">
-                    <textarea rows="5" class="form-control" id="initText" placeholder="Provide the initial text for your story"></textarea>
-                    <span class="char-counter">1050</span>
+        <h1>Submit new story</h1>
+        <hr>
+        <form ng-submit="vm.save(vm.story)" role="form" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="titleInput">Title:</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="titleInput" placeholder="Enter story title" ng-model="vm.story.title">
                 </div>
-                <div class="pull-right">
-                    <div class="btn-bar">
-                        <button type="submit" class="btn btn-info">Submit</button>
-                        <button type="button" class="btn btn-info">Cancel</button>
+            </div>
+            <!--
+            <div class="form-group">
+                <label class="col-md-2 control-label">Contributors</label>
+                <div class="col-md-10" style="padding-bottom:10px">
+                    <label class="radio-inline">
+                        <input type="radio" name="contributors" ng-model="radioValue" value="allUsers">All users
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="contributors" ng-model="radioValue" value="specificUsers">Specific users
+                    </label>
+                </div>
+
+                <div class="col-md-offset-2 col-md-4" ng-show="radioValue==='specificUsers'">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="userNameInput" placeholder="User name or email">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-success btn-sm" ng-click="addUser()">Add</button>
+                        </span>
+                    </div>
+                    <br>
+                    <div class="btn-group btn-group-xs" role="group" style="padding-right:10px;padding-bottom:10px" ng-repeat="user in contributors">
+                        <button type="button" class="btn btn-default">{{ user }}</button>
+                        <button type="button" class="btn btn-default" ng-click="removeUser($index)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-show="showContributorAlert">
+                        <strong>User doesn't exist!</strong> the user you are trying to add doesn't match any registered users
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
-</div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="categorySelect">Category</label>
+                <div class="col-md-2">
+                    <select class="form-control" id="categorySelect">
+                        <option>General</option>
+                        <option>Science Fiction</option>
+                        <option>Narration</option>
+                        <option>Horror</option>
+                        <option>Drama</option>
+                    </select>
+                </div>
+            </div>
+            -->
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="image_url">Image</label>
+                <div class="col-md-6">
+                    <input id="image_url" type="url" class="form-control" style="padding-top:7px" ng-model="vm.story.image_url">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="initText">Initial text:</label>
+                <div class="col-md-6">
+                    <div class="text">
+                        <textarea rows="6" class="form-control" id="initText" ng-model="vm.story.first_text" placeholder="Provide the initial text for your story"></textarea>
+                        <span class="char-counter">{{1050 - vm.story.first_text.length}}</span>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                               <input type="checkbox" ng-model="vm.story.public"> Público
+                        </label>
+                    </div>
+
+                    <div class="pull-right">
+                        <div class="btn-bar">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
