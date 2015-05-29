@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 
-from club.models import Story, Segment, User, Comment
+from club.models import Story, Segment, User, Comment, UsersRelStories
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -86,6 +86,11 @@ class SegmentSerializer(serializers.ModelSerializer):
 class StorySerializer(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True, required=False)
     segments = SegmentSerializer(many=True, read_only=True, required=False)
+    favs = serializers.SerializerMethodField()
+    follows = serializers.SerializerMethodField()
+    is_faved = serializers.SerializerMethodField()
+    is_followed = serializers.SerializerMethodField()
+
 
     class Meta:
         model = Story
@@ -98,6 +103,10 @@ class StorySerializer(serializers.ModelSerializer):
             'publish_date',
             'closed',
             'public',
+            'favs',
+            'is_faved',
+            'is_followed',
+            'follows',
             'users',
             'segments',
         )
@@ -105,6 +114,7 @@ class StorySerializer(serializers.ModelSerializer):
         read_only_fields = (
             'id_story',
             'creator',
+            'closed',
             'publish_date',
         )
 
@@ -112,3 +122,35 @@ class StorySerializer(serializers.ModelSerializer):
         exclusions = super(StorySerializer, self).get_validation_exclusions()
 
         return exclusions + ['creator']
+
+    def get_favs(self, story):
+        favs = UsersRelStories.objects.filter(
+            id_story=story.id_story, favorite=True).count();
+        return favs
+
+    def get_follows(self, story):
+        favs = UsersRelStories.objects.filter(
+            id_story=story.id_story, following=True).count();
+        return favs
+
+    def get_is_faved(self, story):
+        try:
+            user = self.context['request'].user
+            rel = UsersRelStories.objects.get(
+                id_story=story.id_story, id_user=user.id_user)
+
+            return rel.favorite
+
+        except UsersRelStories.DoesNotExist:
+            return False
+
+    def get_is_followed(self, story):
+        try:
+            user = self.context['request'].user
+            rel = UsersRelStories.objects.get(
+                id_story=story.id_story, id_user=user.id_user)
+
+            return rel.following
+
+        except UsersRelStories.DoesNotExist:
+            return False

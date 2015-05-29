@@ -28,7 +28,6 @@ class UserManager(BaseUserManager):
 
         user.set_password(password)
         user.save()
-
         return user
 
     def create_superuser(self, username, password, **kwargs):
