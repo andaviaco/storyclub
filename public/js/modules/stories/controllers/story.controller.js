@@ -15,9 +15,11 @@ function StoryController($scope, $stateParams, StoriesService, SegmentsService,
     vm.today = new Date();
     vm.story = StoriesService.get({id: id_story});
 
+    vm.fav = fav;
     vm.toggleComments = toggleComments;
     vm.addSegment = addSegment;
     vm.addComment = addComment;
+    vm.toggleFollow = toggleFollow;
 
 
     function toggleComments(index) {
@@ -60,6 +62,32 @@ function StoryController($scope, $stateParams, StoriesService, SegmentsService,
 
         function fail(response) {
             console.error(response)
+        }
+    }
+
+    function fav() {
+        StoriesService.fav({id: vm.story.id_story}, success, fail);
+        vm.story.is_faved = !vm.story.is_faved;
+
+        function success(response) {
+            // body...
+        }
+
+        function fail(response) {
+            vm.story.is_faved = !vm.story.is_faved;
+        }
+    }
+
+    function toggleFollow() {
+        StoriesService.follow({id: vm.story.id_story}, success, fail);
+        vm.story.is_followed = !vm.story.is_followed;
+
+        function success(response) {
+            // body...
+        }
+
+        function fail(response) {
+            vm.story.is_followed = !vm.story.is_followed;
         }
     }
 }

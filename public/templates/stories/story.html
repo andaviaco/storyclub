@@ -27,11 +27,13 @@
                     <p ng-bind="vm.story.first_text">
                     </p>
                 </div>
+                <!--
                 <section class="notes">
                     <span class="comments-btn">
                         <i class="fa fa-comments fa-lg"></i>
                     </span>
                 </section>
+                -->
             </article>
 
             <article class="segment" ng-repeat="segment in vm.story.segments">
@@ -79,7 +81,7 @@
 
                     <div class="text">
                         <fieldset>
-                            <textarea id="new_segment_content" name="text" rows="5" class="form-control" ng-model="vm.new_segment.text" required></textarea>
+                            <textarea id="new_segment_content" name="text" rows="5" class="form-control" ng-model="vm.new_segment.text"></vm>.text" required></textarea>
                             <span class="char-counter">{{700 - vm.new_segment.text.length}}</span>
 
                             <button type="submit" class="btn btn-link pull-right">Submit</button>
@@ -96,8 +98,8 @@
 
 <footer class="footerbar">
     <div class="pull-right">
-        <button type="button" class="btn btn-link favorite"><i class="fa fa-star-o fa-lg"></i></button>
-        <button type="butt  on" class="btn btn-default btn-sm">Follow</button>
+        <button type="button" class="btn btn-link favorite" ng-click="vm.fav()"><i class="fa fa-lg" ng-class="{'fa-star-o': !vm.story.is_faved, 'fa-star': vm.story.is_faved}"></i></button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="vm.toggleFollow()">{{vm.story.is_followed | followStatus}}</button>
 
         <div class="social-share">
             <span class="social-btn"><i class="fa fa-facebook"></i></span>
